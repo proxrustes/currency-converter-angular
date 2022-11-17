@@ -1,5 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
 import { HttpService } from '../Api/HttpService';
 @Component({
   selector: 'header-comp',
@@ -7,9 +7,12 @@ import { HttpService } from '../Api/HttpService';
 })
 
 export class HeaderComponent {
+
+  "USDrate"= new FormControl(0)
+  "EURrate"= new FormControl(0)
+
+
   title = 'HeaderComponent';
-  USDrate:number=0;
-  EURrate:number=0;
   
   constructor(private httpService: HttpService){}
 
@@ -18,8 +21,8 @@ export class HeaderComponent {
     {
      const resultjs= JSON.parse(result)
      const resultInit = resultjs["rates"];
-     this.USDrate = resultInit["USD"];
-     this.EURrate = resultInit["EUR"];
+     this.EURrate.setValue(resultInit["EUR"]);
+     this.USDrate.setValue(resultInit["USD"]);
    }
      );
 

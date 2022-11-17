@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { forwardRefWithAs } from '@headlessui/react/dist/utils/render';
 import { HttpService } from '../Api/HttpService';
 
 @Component({
@@ -10,7 +12,17 @@ export class ConverterComponent {
   title = 'ConverterComponent';
   mainAmount:string = "amount-1";
 
+  "amount1"= new FormControl(0)
+  "amount2"= new FormControl(0)
 
+  "currency-1"= new FormControl('')
+  "currency-2"= new FormControl('')
+  
+"amountFrom"= new FormControl(1)
+"amountTo"= new FormControl(2)
+"currencyFrom"= new FormControl('')
+"currencyTo"= new FormControl('')
+  
   constructor(private httpService: HttpService){}
 
   convert (amount: number, from: string, to: string) :void
@@ -21,23 +33,23 @@ export class ConverterComponent {
       const resultjs= JSON.parse(result)
       const rates = resultjs["rates"];
       result=rates[to];
-      
+      const nresult = Number(result)
       if (this.mainAmount == "amount-1")
       {
-        (document.getElementById("amount-2") as HTMLInputElement).value = result;
+        this['amount2'].setValue(nresult);
         
     console.log('converted')
       }
       else if (this.mainAmount == "amount-2"){
-       (document.getElementById("amount-1") as HTMLInputElement).value = result;
+        this['amount1'].setValue(nresult);
        
     console.log('converted')
       }
 
-      (document.getElementById("i_to") as HTMLInputElement).innerText = result;
-      (document.getElementById("i_from") as HTMLInputElement).innerText = amount.toString();
-      (document.getElementById("c_from") as HTMLInputElement).innerText = from;
-      (document.getElementById("c_to") as HTMLInputElement).innerText = to;
+      this.amountTo.setValue(nresult);
+      this.amountFrom.setValue(amount);
+      this.currencyFrom.setValue(from);
+      this.currencyTo.setValue(to);
     }
       );
      }

@@ -6,6 +6,7 @@ import { HttpService } from './Api/HttpService';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './Header/header.component';
 import { ConverterComponent } from './Converter/converter.component';
+import {FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,9 +17,15 @@ import { ConverterComponent } from './Converter/converter.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule, 
+    ReactiveFormsModule
   ],
   providers: [HttpService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+  
+
+ }
