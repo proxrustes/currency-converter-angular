@@ -15,8 +15,8 @@ export class ConverterComponent {
   "amount1"= new FormControl(0)
   "amount2"= new FormControl(0)
 
-  "currency-1"= new FormControl('')
-  "currency-2"= new FormControl('')
+  "currency1"= new FormControl('')
+  "currency2"= new FormControl('')
   
 "amountFrom"= new FormControl(1)
 "amountTo"= new FormControl(2)

@@ -10,7 +10,7 @@
     <input value={{amount1.value}} [formControl]="amount1"   (change)="onInput('amount-1')"  placeholder ="0.00"
     class="bg-gray-200 appearance-none text-lg font-bold mx-2 border-2 border-gray-200 rounded w-[150px] py-2 pl-4 pr-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-[#6C9A8B]" id="amount-1" type="number"/>
   
-    <select id="from" (change)=changedCurrency()
+    <select id="from" (change)=changedCurrency() [formControl]="currency1"
     class="bg-gray-200 appearance-none font-bold mx-2 border-2 border-gray-200 rounded w-[300px] py-2 pl-4  text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-[#6C9A8B]">
   <option class="" value="USD">US Dollar (USD)</option>
   <option class="" value="EUR">Euro (EUR)</option>
@@ -21,10 +21,10 @@
    </div>
    <div class="flex mx-auto mt-4  mb-12">
   
-   <input min={0} (change)="onInput('amount-2')" value={{amount2.value}} [formControl]="amount2"  placeholder ="0.00"
+   <input min={0} (change)="onInput('amount-2')" [formControl]="amount2"  placeholder ="0.00"
    class="bg-gray-200 appearance-none text-lg font-bold mx-2 border-2 border-gray-200 rounded w-[150px] py-2 pl-4 pr-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-[#6C9A8B]" id="amount-2" type="number"/>
   
-  <select id="to" (change)=changedCurrency() 
+  <select id="to" (change)=changedCurrency() [formControl]="currency2"
   class="bg-gray-200 appearance-none font-bold mx-2 border-2 border-gray-200 rounded w-[300px] py-2 pl-4  text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-[#6C9A8B]">
   <option class="" value="USD">US Dollar (USD)</option>
   <option class="" value="EUR">Euro (EUR)</option>
