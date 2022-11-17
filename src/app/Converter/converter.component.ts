@@ -1,11 +1,9 @@
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { HttpService } from './HttpService';
+import { HttpService } from '../Api/HttpService';
 
 @Component({
   selector: 'converter-comp',
-  templateUrl: './converter.component.html',
-  styleUrls: ['./app.component.css']
+  templateUrl: './converter.component.html'
 })
 
 export class ConverterComponent {
