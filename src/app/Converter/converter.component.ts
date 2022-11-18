@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { forwardRefWithAs } from '@headlessui/react/dist/utils/render';
+import { FormControl, FormGroup } from '@angular/forms';
 import { HttpService } from '../Api/HttpService';
+import { Currency } from '../Models/currency';
 
 @Component({
   selector: 'converter-comp',
@@ -10,19 +10,26 @@ import { HttpService } from '../Api/HttpService';
 
 export class ConverterComponent {
   title = 'ConverterComponent';
-  mainAmount:string = "amount-1";
+  mainAmount:string = "amount1";
+  default: string = 'EUR';
 
-  "amount1"= new FormControl(0)
-  "amount2"= new FormControl(0)
 
-  "currency1"= new FormControl('')
-  "currency2"= new FormControl('')
-  
-"amountFrom"= new FormControl(1)
-"amountTo"= new FormControl(2)
-"currencyFrom"= new FormControl('')
-"currencyTo"= new FormControl('')
-  
+
+currencies = [
+  new Currency("EUR", "Euro"),
+  new Currency("UAH", "Hryvna"),
+  new Currency("VES", "Venezuelan Bolivar"),
+  new Currency("USD", "US Dollar")
+]
+
+  "amount1"= new FormControl(0, { nonNullable: true })
+  "amount2"= new FormControl(0, { nonNullable: true })
+
+    "currency1"= new FormControl('EUR', { nonNullable: true })
+    "currency2"= new FormControl('EUR', { nonNullable: true })
+
+    
+      
   constructor(private httpService: HttpService){}
 
   convert (amount: number, from: string, to: string) :void
@@ -34,22 +41,18 @@ export class ConverterComponent {
       const rates = resultjs["rates"];
       result=rates[to];
       const nresult = Number(result)
-      if (this.mainAmount == "amount-1")
+
+      if (this.mainAmount == "amount1")
       {
-        this['amount2'].setValue(nresult);
-        
-    console.log('converted')
+        this.amount2.setValue(nresult);
       }
-      else if (this.mainAmount == "amount-2"){
+      else if (this.mainAmount == "amount2"){
         this['amount1'].setValue(nresult);
        
-    console.log('converted')
+    console.log('converted 2 '+ this.currency2.value)
       }
 
-      this.amountTo.setValue(nresult);
-      this.amountFrom.setValue(amount);
-      this.currencyFrom.setValue(from);
-      this.currencyTo.setValue(to);
+    
     }
       );
      }
@@ -61,23 +64,32 @@ export class ConverterComponent {
 
   changedCurrency() :void{
     console.log("changed currency")
-    let amount = Number((document.getElementById(this.mainAmount) as HTMLInputElement).value);
-
-    if (amount <0 )
-    {
-      amount = amount * (-1)
-    }
 
     switch(this.mainAmount){
-      case "amount-1": {
-        let from = (document.getElementById("from") as HTMLInputElement).value;
-        let to = (document.getElementById("to") as HTMLInputElement).value;
+      
+      case "amount1": {
+        let from = this.currency1.value;
+        let to = this.currency2.value;
+
+        let amount= this.amount1.value;
+        if (amount <0 )
+        {
+          amount = amount * (-1)
+        }
+
         this.convert(amount, from, to)
         break; 
       }
-      case "amount-2":{
-        let from = (document.getElementById("to") as HTMLInputElement).value;
-        let to = (document.getElementById("from") as HTMLInputElement).value;
+      case "amount2":{
+        let from = this.currency2.value;
+        let to = this.currency1.value;
+
+        let amount= this.amount2.value;
+        if (amount <0 )
+        {
+          amount = amount * (-1)
+        }
+    
         this.convert(amount, from, to)
         break; 
       }
