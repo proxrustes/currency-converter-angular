@@ -5,7 +5,8 @@ import { Currency } from '../Models/currency';
 
 @Component({
   selector: 'converter-comp',
-  templateUrl: './converter.component.html'
+  templateUrl: './converter.component.html',
+  styleUrls: ["./converter.component.css"]
 })
 
 export class ConverterComponent {
